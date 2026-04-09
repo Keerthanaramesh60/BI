@@ -1,0 +1,11 @@
+SelectedCountry = SELECTEDVALUE('MedalsData'[Nation1], "Select a Country")
+
+Total_Selected_Country = CALCULATE(SUM('MedalsData'[Total]), 'MedalsData'[Nation1] = SELECTEDVALUE('MedalsData'[Nation1]))
+
+Gold_SelectedCountry = CALCULATE(SUM('MedalsData'[Gold]), 'MedalsData'[Nation1] = SELECTEDVALUE('MedalsData'[Nation1]))
+
+Bronze_SelectedCountry = CALCULATE(SUM('MedalsData'[Bronze]), 'MedalsData'[Nation1] = SELECTEDVALUE('MedalsData'[Nation1]))
+
+CountryRank = RANKX(ALL('MedalsData'), SUM('MedalsData'[Total]), , DESC, DENSE)
+
+MedalPercentage = DIVIDE([TotalMedals_SelectedCountry], SUMX(ALL('MedalsData'), SUM('MedalsData'[Total])), 0) * 100

@@ -1,0 +1,13 @@
+Total Revenue = SUM(Orders[Revenue])
+Total Profit = [total_revenue] - [total_cost]
+Profit Margin (%) = DIVIDE([total_profit], [total_revenue], 0)
+Total Orders = DISTINCTCOUNT(Orders[Order ID])
+Average Order Value (AOV) = DIVIDE([total_revenue], [total_orders], 0)
+
+Monthly Sales Trend = SUMMARIZE(Orders, FORMAT(Orders[Date], "YYYY-MM"), "Monthly Revenue", SUM(Orders[Revenue]))
+Top-Selling Cookies = TOPN(5, SUMMARIZE(Orders, Orders[Product], "Total Sales", SUM(Orders[Units Sold])), [Total Sales], DESC)
+Customer-wise Revenue = CALCULATE([total_revenue], ALLEXCEPT(Orders, Orders[Customer ID]))
+Total Orders per Customer = CALCULATE([total_orders], ALLEXCEPT(Orders, Orders[Customer ID]))
+Top 5 Customers by Revenue = TOPN(5, SUMMARIZE(Orders, Orders[Customer ID], "Total Revenue", SUM(Orders[Revenue])), [Total Revenue], DESC)
+
+Profit per Cookie Type = SUMMARIZE(Orders, Orders[Product], "Total Profit", SUM(Orders[Revenue]) - SUM(Orders[Cost]))

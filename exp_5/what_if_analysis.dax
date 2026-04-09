@@ -1,0 +1,5 @@
+Parameter-SalesValue = SELECTEDVALUE('Parameter'[Parameter])
+
+Sales_After_Discount = sum(financials[ Sales]) - Parameter[Sales_Discount]
+
+Sales_Discount = ((sum(financials[ Sales])*Parameter[Parameter-SalesValue])/100)
